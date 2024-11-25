@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
-// create a book model
-let bookModel = mongoose.Schema({
+
+let ConcertTracker = mongoose.Schema({
     Artist: String,
     Genre: String,
     Date: String,
@@ -11,4 +11,4 @@ let bookModel = mongoose.Schema({
         collection: "concerts"
     }
 );
-module.exports = mongoose.model('Concerts', concertsModel);
+module.exports = mongoose.model('concerts', ConcertTracker);
