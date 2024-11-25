@@ -9,7 +9,7 @@
     </div>
     <% } %>
 
-
+<!-- Login configuration that include, checking users previously stored data and giving an option to register via a button -->
     <div class="row">
         <div class="offset-md-4 col-md-4">
             <h1>Please login below</h1>
@@ -17,24 +17,18 @@
             <form method="post" autocomplete="off">
                 <fieldset class="form-group">
                     <label for="username"></label>
-                    <input type="text" class="form-control"
-                    name="username" 
-                    placeholder="Enter username here"
-                    id="username" required autofocus>
+                    <input type="text" class="form-control" name="username"  placeholder="Enter username here" id="username" required autofocus>
                 </fieldset>
                 <fieldset class="form-group">
                     <label for="password"></label>
-                    <input type="password" class="form-control"
-                    name="password" 
-                    placeholder="Enter password here"
-                    id="password" required>
+                    <input type="password" class="form-control" name="password"   placeholder="Enter password here" id="password" required>
                     or
                     <a href="/register">Register Here</a>
                 </fieldset>
                 <fieldset class="form-group text-right">
-                    <input type="submit" class="btn btn-success"
-                    value="Login">
+                    <input type="submit" class="btn btn-success" value="Login">
                     <a href="/home"></a>
+                    <!-- sends them to home page -->
                         <input type="button" class="btn btn-warning" value="Cancel" onclick="window.location.href='/'">
                     </a>
                 </fieldset>

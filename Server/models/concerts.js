@@ -12,3 +12,4 @@ let ConcertTracker = mongoose.Schema({
     }
 );
 module.exports = mongoose.model('concerts', ConcertTracker);
+//assignes what database mongodb is using

@@ -1,6 +1,6 @@
 let mongoose = require('mongoose');
 let passportLocalMongoose = require('passport-local-mongoose');
-
+//authentication setup process
 let User = mongoose.Schema({
     username:
     {

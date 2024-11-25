@@ -12,7 +12,7 @@ function requireAuth(req,res,next){
     next();
 }
 
-//Router GET
+//Router get main
 router.get('/',async(req,res,next)=>{
 try{
     const Concertslist = await concerts.find();
@@ -28,6 +28,7 @@ try{
         })
     }
     });
+    //router get home
     router.get('/home',async(req,res,next)=>{
         try{
             const Concertslist = await concerts.find();
@@ -43,7 +44,7 @@ try{
                 })
             }
             });
-    
+ //router get add   
 router.get('/add',async(req,res,next)=>{
     try{
         res.render('concerts/add',{
@@ -59,7 +60,7 @@ router.get('/add',async(req,res,next)=>{
         })
     }
 });
-
+//router post add
 router.post('/add',async(req,res,next)=>{
     try{
         let newconcerts = concerts({
@@ -81,7 +82,7 @@ router.post('/add',async(req,res,next)=>{
         })
     }
 });
-
+//router get edit
 router.get('/edit/:id',async(req,res,next)=>{
     try{
         const id = req.params.id;
@@ -101,7 +102,7 @@ router.get('/edit/:id',async(req,res,next)=>{
         next(err);
     }
 });
-
+//router post edit
 router.post('/edit/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;
@@ -124,6 +125,7 @@ router.post('/edit/:id',async(req,res,next)=>{
         })
     }
 });
+//router get delete
 router.get('/delete/:id',async(req,res,next)=>{
     try{
         let id=req.params.id;

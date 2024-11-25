@@ -1,19 +1,16 @@
 let express = require('express');
 let router = express.Router();
-let mongoose = require('mongoose'); // npm i mongoose
+let mongoose = require('mongoose'); 
 let jwt = require('jsonwebtoken');
+const concerts = require('../models/concerts'); 
 
-//let concerts = require('../models/concerts');
-
-const concerts = require('../models/concerts'); // Assuming this is your model for concerts
-
-
+//display concertlist
 module.exports.displayConcertslist = (req, res, next) => {
     concerts.find((err, concertslist) => {
         if (err) {
             return console.error(err);
         } else {
-            // Log the actual data to ensure it's being retrieved
+            // Log testing, had issues with not definded earlier
             console.log('Concerts data being passed to template:', concertslist);
             res.render('concerts/list', {
                 title: 'Concerts',
@@ -23,14 +20,14 @@ module.exports.displayConcertslist = (req, res, next) => {
         }
     });
 };
-
+//display add
 module.exports.displayAddPage = (req,res,next)=> {
     res.render('concerts/add',{
         title:'Add Concert',
         displayName: req.user ? req.user.displayName:''  
     })
 }
-
+//process add
 module.exports.processAddPage = (req,res,next)=> {
     let newconcert = concert ({
     "Artist":req.body.Artist,
@@ -52,7 +49,7 @@ module.exports.processAddPage = (req,res,next)=> {
     })
  
  }
-
+//display edit
  module.exports.displayEditPage = (req,res,next)=> {
     let id = req.params.id;
     concerts.findById(id,(err,concertsToEdit) =>{
@@ -69,7 +66,7 @@ module.exports.processAddPage = (req,res,next)=> {
         }
     });
 }
-
+//process edit
  module.exports.processEditPage = (req,res,next)=> {
     let id=req.params.id;
     let updateconcerts = concerts({
@@ -93,7 +90,7 @@ module.exports.processAddPage = (req,res,next)=> {
         }
     });
 }
-
+//delete operations
 module.exports.performDelete = (req,res,next)=> {
     let id =req.params.id;
     concerts.deleteOne({_id:id},(err)=>{

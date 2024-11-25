@@ -6,26 +6,25 @@ let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let session = require('express-session');
 let passport = require('passport');
-
 let passportJWT = require('passport-jwt');
 let JWTStrategy = passportJWT.Strategy;
 let ExtractJWT = passportJWT.ExtractJwt;
-
-
 let passportLocal = require('passport-local');
 let localStrategy = passportLocal.Strategy;
 let flash = require('connect-flash');
 let app = express();
 let cors = require('cors');
-// create a user model instance
+
+
+// creates user model 
 let userModel = require('../models/user');
 let User = userModel.User;
 
-// config mongoDB
+// configure mongoDB
 let mongoose = require('mongoose');
 let DB = require('./db');
 
-// point mongoose to DB URI
+// tell mongoose where to go
 
 mongoose.connect(DB.URI);
 let mongDB = mongoose.connection;
@@ -35,30 +34,30 @@ mongDB.once('open', ()=> {
 });
 mongoose.connect(DB.URI,{useNewURIParser:true,useUnifiedTopology:true})
 
-// Set-up Express Session
+//  Express set up
 app.use(session({
   secret:"SomeSecret",
   saveUninitialized:false,
   resave:false
 }))
 
-// implement a User Authentication
+//User Auth
 passport.use(User.createStrategy());
 
 // serialize and deserialze the user information
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// initialize passport
+// initialize the passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// initialize flash
+// initialize the flash
 app.use(flash());
 
 
 
-
+// import routes 
 let indexRouter = require('../routes/index');
 let usersRouter = require('../routes/users');
 let concertsRouter = require('../routes/concerts');
@@ -76,11 +75,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(express.static(path.join(__dirname, '../../node_modules')));
 
+//initialize jwt
 let jwtoptions = {};
 jwtoptions.jwtFromRequest = ExtractJWT.fromAuthHeaderAsBearerToken();
 jwtoptions.secretOrKey = DB.secret;
 
-
+//routing setup
 app.use('/', indexRouter); 
 app.use('/users', usersRouter); 
 app.use('/concerts-list', concertsRouter); 
@@ -90,7 +90,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-
+//error handle
 app.use(function(err, req, res, next) {
   
   res.locals.message = err.message;

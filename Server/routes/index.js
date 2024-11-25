@@ -8,7 +8,7 @@ let jwt = require('jsonwebtoken');
 router.get('/', indexController.displayHomePage);
 router.get('/home', indexController.displayHomePage);
 
-
+//get other pages 
 
 router.get('/concerts',indexController.displayServicePage);
 

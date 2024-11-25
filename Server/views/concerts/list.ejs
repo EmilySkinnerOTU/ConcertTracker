@@ -2,7 +2,9 @@
 <%- include ../partials/main_nav.ejs %>
 
 <main class="container">
+    <!-- List page -->
     <div class="row">
+        <!-- only show if logged in-->
         <div class="col-md-offset-3 col-md-10">
             <h1><%= title %></h1>
             <% if (typeof displayName == 'string' && displayName) { %>
@@ -12,7 +14,7 @@
                 <br>
             <% } %>
             <br>
-
+<!-- show basic info-->
             <table class="table table-bordered table-striped table-hover">
                 <tr class="d-flex">
                     <% if (typeof displayName == 'string' && displayName) { %>
@@ -24,6 +26,7 @@
                         <th class="text-center col-1"></th>
                         <th class="text-center col-1"></th>
                     <% } else { %>
+                        <!-- do not show delete and edit -->
                         <th class="text-center col-2">Artist</th>
                         <th class="text-center col-2">Genre</th>
                         <th class="text-center col-1">Date</th>
@@ -42,16 +45,19 @@
                                 <td class="text-center col-5"><%= Concertslist[count].Location %></td>
                                 <td class="text-center col-1"><%= Concertslist[count].Cost %></td>
                                 <td class="text-center col-1">
+                                    <!-- Edit page -->
                                     <a href="/concerts-list/edit/<%= Concertslist[count]._id %>" class="btn btn-primary">
                                         <i class="fas fa-pencil-alt"></i> Edit
                                     </a>
                                 </td>
+                                <!-- Delete page -->
                                 <td class="text-center col-1">
                                     <a href="/concerts-list/delete/<%= Concertslist[count]._id %>" class="btn btn-danger">
                                         <i class="fas fa-trash-alt"></i> Delete
                                     </a>
                                 </td>
                             <% } else { %>
+                                <!-- Show only the basic info to logged out users-->
                                 <td class="text-center col-2"><%= Concertslist[count].Artist %></td>
                                 <td class="text-center col-2"><%= Concertslist[count].Genre %></td>
                                 <td class="text-center col-1"><%= Concertslist[count].Date %></td>
@@ -62,7 +68,8 @@
                     <% } %>
                 <% } else { %>
                     <tr>
-                        <td colspan="7" class="text-center">No concerts available.</td>
+                        <!-- If nothing avaliable show no shows  -->
+                        <td colspan="7" class="text-center">No concerts available currently.</td>
                     </tr>
                 <% } %>
             </table>
